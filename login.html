@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>
+           login page 
+        </title>
+
+        <link rel="stylesheet" href="login.css">
+        <script src="server.js" defer></script>
+        <script>
+          function takenvalue() {
+              var email = document.getElementById("email").value;
+              var Password = document.getElementById("Password").value;
+  
+              fetch('/submit', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: `email=${encodeURIComponent(email)}&psw=${encodeURIComponent(Password)}`,
+              })
+              .then(response => response.text())
+              .then(message => {
+                  console.log(message);
+                  // Update the webpage or perform any additional actions based on the server response
+                  alert(message); // For demonstration purposes, you can use alert to display the message
+              });
+  
+              return false; // Prevent the form from actually submitting
+          }
+      </script>    
+    </head>
+    <body>
+      <div class="singup">
+        <form  onsubmit="takenvalue()" action="/submit" method="post" class="form-container">
+            <div class="container">
+              <h1 style="color: white;">Sign Up</h1>
+              <p style="color: white;">Please fill in this form to create an account.</p>
+              <hr>
+              <label for="email" style="color: white;" class="eiml"><b> Email</b></label>
+              <input type="text" style="color: white;" placeholder="Enter Email" class="email" name="email" required>
+          
+              <label for="psw"style="color: white;" class="pwsd"><b>Password</b></label>
+              <input type="password" style="color: white;" placeholder="Enter Password" class="Password" name="psw" required>
+          
+              <div class="clearfix">
+                <a href="index.html"><button type="button" class="cancelbtn" style="border-radius: 10px;">Cancel</button></a>
+                <button type="submit" value="Sing Up" class="signupbtn" style="border-radius: 10px;">Sign Up</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </body>
+</html>
